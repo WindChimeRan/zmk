@@ -354,11 +354,28 @@ config ZMK_COMBO_MAX_KEYS_PER_COMBO
 #Combo options
 endmenu
 
+menu "Leader Options"
+
+config ZMK_LEADER_MAX_KEYS_PER_SEQUENCE
+    int "Maximum number of key presses in a leader sequence"
+    default 4
+
+config ZMK_LEADER_MAX_SEQUENCES_PER_KEY
+    int "Maximum number of leader sequences that a key can belong to"
+    default 5
+
+#Leader options
+endmenu
+
 menu "Behavior Options"
 
 config ZMK_BEHAVIORS_QUEUE_SIZE
 	int "Maximum number of behaviors to allow queueing from a macro or other complex behavior"
 	default 64
+
+config ZMK_DYNAMIC_MACRO_MAX_ACTIONS
+    int "Maximum number of keystrokes to be recorded in a dynamic macro"
+    default 64
 
 DT_COMPAT_ZMK_BEHAVIOR_KEY_TOGGLE := zmk,behavior-key-toggle
 
@@ -366,6 +383,27 @@ config ZMK_BEHAVIOR_KEY_TOGGLE
         bool
         default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_KEY_TOGGLE))
 
+DT_COMPAT_ZMK_LEADER := zmk,leader-sequences
+
+config ZMK_LEADER
+        bool
+        default $(dt_compat_enabled,$(DT_COMPAT_ZMK_LEADER))
+
+DT_COMPAT_ZMK_BEHAVIOR_LEADER_KEY := zmk,behavior-leader-key
+
+config ZMK_BEHAVIOR_LEADER_KEY
+        bool
+        default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_LEADER_KEY))
+DT_COMPAT_ZMK_BEHAVIOR_TRI_STATE := zmk,behavior-tri-state
+
+config ZMK_BEHAVIOR_TRI_STATE
+        bool
+        default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_TRI_STATE))
+DT_COMPAT_ZMK_BEHAVIOR_TURBO_KEY := zmk,behavior-turbo-key
+
+config ZMK_BEHAVIOR_TURBO_KEY
+        bool
+        default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_TURBO_KEY))
 config ZMK_MACRO_DEFAULT_WAIT_MS
 	int "Default time to wait (in milliseconds) before triggering the next behavior in macros"
 	default 15
@@ -501,6 +539,28 @@ choice CBPRINTF_IMPLEMENTATION
 	default CBPRINTF_NANO
 
 endchoice
+
+DT_COMPAT_ZMK_BEHAVIOR_DYNAMIC_MACRO := zmk,behavior-dynamic-macro
+
+config ZMK_BEHAVIOR_DYNAMIC_MACRO
+    bool
+    default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_DYNAMIC_MACRO))
+DT_COMPAT_ZMK_BEHAVIOR_LAST_DEVICE := zmk,behavior-last-device
+
+config ZMK_BEHAVIOR_LAST_DEVICE
+    bool
+    default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_LAST_DEVICE))
+DT_COMPAT_ZMK_BEHAVIOR_SENSOR_ROTATE := zmk,behavior-sensor-rotate
+
+config ZMK_BEHAVIOR_SENSOR_ROTATE
+    bool
+    default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_SENSOR_ROTATE))
+
+DT_COMPAT_ZMK_BEHAVIOR_SENSOR_ROTATE_VAR := zmk,behavior-sensor-rotate-var
+
+config ZMK_BEHAVIOR_SENSOR_ROTATE_VAR
+    bool
+    default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BEHAVIOR_SENSOR_ROTATE_VAR))
 
 module = ZMK
 module-str = zmk
